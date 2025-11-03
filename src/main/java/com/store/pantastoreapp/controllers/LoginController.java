@@ -1,10 +1,7 @@
 package com.store.pantastoreapp.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import javax.swing.*;
 
@@ -25,16 +22,18 @@ public class LoginController {
     private Button login;
 
     @FXML
-    public void onSignup(){
-
-    }
+    private Hyperlink signup;
 
     @FXML
-    public void onLogin(){
-        if(username.getText().equals("admin") && password.getText().equals("<PASSWORD>")){
-            JOptionPane.showMessageDialog(null, "Login Successful");
+    private void initialize(){
+    login.setOnAction(e -> {
+        if(username.getText().isEmpty()){
+            usernameErrorMessage.setText("Please enter your username");
+        }else if(password.getText().isEmpty()){
+            passwordErrorMessage.setText("Please enter your password");
         }else{
-            JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+            JOptionPane.showMessageDialog(null, "Login Successful");
         }
+    });
     }
 }
