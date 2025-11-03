@@ -2,6 +2,8 @@ module com.store.pantastoreapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires java.logging;
+    requires jdk.compiler;
 
 
     opens com.store.pantastoreapp to javafx.fxml;
