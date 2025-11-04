@@ -28,12 +28,17 @@ public class SignupController {
     @FXML private PasswordField password;
     @FXML private PasswordField confirmPassword;
     @FXML private Label errorMessage;
+    @FXML private Button back;
 
     @FXML
     public void passwordsMatch(ActionEvent event) {
         errorMessage.setVisible(false);
-
-        if (!password.getText().equals(confirmPassword.getText())) {
+        if (!isValidPassword(password.getText())) {
+            errorMessage.setVisible(true);
+            errorMessage.setText("Password must be 8–16 chars\n include an uppercase letter\n a number\n and a unique symbol.");
+            return;
+        }
+        else if (!password.getText().equals(confirmPassword.getText())) {
             errorMessage.setVisible(true);
             errorMessage.setText("Passwords do not match");
             return;
@@ -48,7 +53,6 @@ public class SignupController {
             errorMessage.setText("All fields are required");
             return;
         }
-
         try {
             Path csvPath = Paths.get("src", "main", "resources", "data", "UserInfo.csv");
 
@@ -112,7 +116,26 @@ public class SignupController {
         }
         return value;
     }
-
+    private boolean isValidPassword(String password) {
+        // Must contain:
+        // - at least one uppercase letter
+        // - at least one lowercase letter
+        // - at least one digit
+        // - at least one special character
+        // - 8 to 16 characters long
+        String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$";
+        return password.matches(regex);
+    }
+    public void handleBack(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            SceneManager.switchScene(stage, "/FXML/Login.fxml");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Error switching to Login scene", e);
+            errorMessage.setText("Could not open Login page.");
+            errorMessage.setVisible(true);
+        }
+    }
     public String getfn() { return firstname.getText(); }
     public String getln() { return lastname.getText(); }
     public String getpass() { return password.getText(); }

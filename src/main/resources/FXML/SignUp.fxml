@@ -10,19 +10,20 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.store.pantastoreapp.controllers.SignupController">
    <children>
       <TextField fx:id="firstname" layoutX="239.0" layoutY="114.0" />
-      <Label layoutX="274.0" layoutY="55.0" text="Sign UP">
+      <Label layoutX="275.0" layoutY="55.0" text="Sign UP">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
       <Label layoutX="175.0" layoutY="118.0" text="First Name:" />
       <TextField fx:id="lastname" layoutX="239.0" layoutY="150.0" />
-      <Button fx:id="signup" layoutX="285.0" layoutY="286.0" mnemonicParsing="false" onAction="#passwordsMatch" text="Sign Up" />
+      <Button fx:id="signup" layoutX="245.0" layoutY="295.0" mnemonicParsing="false" onAction="#passwordsMatch" text="Sign Up" />
       <Label layoutX="175.0" layoutY="154.0" text="Last Name:" />
       <Label layoutX="177.0" layoutY="191.0" text="Password:" />
       <Label layoutX="135.0" layoutY="230.0" text="Confirm Password:" />
-      <Label fx:id="errorMessage" layoutX="300.0" layoutY="268.0" text="Label" visible="false" />
+      <Label fx:id="errorMessage" layoutX="238.0" layoutY="268.0" prefHeight="18.0" prefWidth="150.0" text="Label" visible="false" />
       <PasswordField fx:id="password" layoutX="240.0" layoutY="187.0" />
       <PasswordField fx:id="confirmPassword" layoutX="239.0" layoutY="226.0" />
+      <Button fx:id="back" layoutX="329.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleBack" text="Log In" />
    </children>
 </AnchorPane>

@@ -56,7 +56,7 @@ public class LoginController {
                 String storedFname = unescapeCsv(parts[0]);
                 String storedLname = unescapeCsv(parts[1]);
                 String storedHash = parts[2].trim();
-                String combinedUsername = (storedFname + storedLname).trim();
+                String combinedUsername = (storedFname +"-"+ storedLname).trim();
                 if (combinedUsername.equalsIgnoreCase(enteredUser)) {
                     // recompute hash using same salt (firstname+lastname)
                     String recomputedHash = hashPasswordSha256(enteredPass, storedFname + storedLname);
