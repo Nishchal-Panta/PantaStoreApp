@@ -1,42 +1,24 @@
 package com.store.pantastoreapp.Models;
 
-import java.util.Objects;
-
 public abstract class User {
-    protected String name;
-    protected String phone;
+    protected String Fname;
+    protected String Lname;
     protected String password; // Stored securely (e.g., hashed)
 
     public User() {
         // Default constructor for frameworks if needed
     }
 
-    public User(String name, String phone, String password) {
-        this.name = name;
-        this.phone = phone;
+    public User(String Fname, String Lname, String password) {
+        this.Fname = Fname;
+        this.Lname = Lname;
         this.password = password;
     }
-
-    // Getters and Setters
-    public String getName() {
-        return name;
+    public void setFname(String Fname) {
+        this.Fname = Fname;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+    public void setLname(String name) { this.Lname = Lname;}
 
     public void setPassword(String password) {
         this.password = password;
