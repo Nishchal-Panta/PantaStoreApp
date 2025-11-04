@@ -1,14 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.store.pantastoreapp.controllers.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
+<!--<?import javafx.scene.image.*?>-->
+<!--<?import javafx.scene.layout.*?>-->
+<!--<?import javafx.geometry.Insets?>-->
+<!--<BorderPane xmlns:fx="http://javafx.com/fxml"-->
+<!--            fx:controller="com.store.pantastoreapp.controllers.DashboardController"-->
+<!--            prefWidth="1200" prefHeight="800"-->
+<!--            style="-fx-background-color: linear-gradient(to bottom right, #f7f9fc, #e3e7ee);">-->
+<!--    &lt;!&ndash; Top Section &ndash;&gt;-->
+<!--    <top>-->
+<!--        <HBox spacing="15" alignment="CENTER_LEFT">-->
+<!--            <padding>-->
+<!--                <Insets top="15" right="15" bottom="15" left="15"/>-->
+<!--            </padding>-->
+<!--            <Label fx:id="welcomeLabel"-->
+<!--                   text="Welcome User"-->
+<!--                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2b2b2b;" />-->
+<!--            <Pane HBox.hgrow="ALWAYS"/>-->
+<!--            <ImageView fx:id="avatarImage"-->
+<!--                       fitHeight="50" fitWidth="50"-->
+<!--                       pickOnBounds="true" preserveRatio="true"-->
+<!--                       style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 5, 0, 2, 2);"/>-->
+<!--        </HBox>-->
+<!--    </top>-->
+<!--    &lt;!&ndash; Center Section &ndash;&gt;-->
+<!--    <center>-->
+<!--        <ScrollPane fitToWidth="true" fitToHeight="true"-->
+<!--                    hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED"-->
+<!--                    style="-fx-background-color: transparent;">-->
+<!--            <VBox spacing="25">-->
+<!--                <padding>-->
+<!--                    <Insets top="20" right="20" bottom="20" left="20"/>-->
+<!--                </padding>-->
+<!--                &lt;!&ndash; Charts &ndash;&gt;-->
+<!--                <HBox spacing="30" alignment="CENTER">-->
+<!--                    <LineChart fx:id="lineChart"-->
+<!--                               prefHeight="300" prefWidth="550"-->
+<!--                               title="Top 10 Items Sold">-->
+<!--                        <xAxis>-->
+<!--                            <CategoryAxis label="Items"/>-->
+<!--                        </xAxis>-->
+<!--                        <yAxis>-->
+<!--                            <NumberAxis label="Quantity Sold"/>-->
+<!--                        </yAxis>-->
+<!--                    </LineChart>-->
+<!--                    <BarChart fx:id="barChart"-->
+<!--                              prefHeight="300" prefWidth="550"-->
+<!--                              title="Low Stock Items">-->
+<!--                        <xAxis>-->
+<!--                            <CategoryAxis label="Items"/>-->
+<!--                        </xAxis>-->
+<!--                        <yAxis>-->
+<!--                            <NumberAxis label="Quantity Left"/>-->
+<!--                        </yAxis>-->
+<!--                    </BarChart>-->
+<!--                </HBox>-->
+<!--                &lt;!&ndash; Controls &ndash;&gt;-->
+<!--                <HBox spacing="15" alignment="CENTER_LEFT">-->
+<!--                    <Button fx:id="addItemBtn" text="Add Item" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>-->
+<!--                    <Button fx:id="logSaleBtn" text="Log Sale" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>-->
+<!--                    <TextField fx:id="searchField" promptText="Search Item..." prefWidth="200"/>-->
+<!--                    <Button fx:id="searchBtn" text="Search"/>-->
+<!--                    <Button fx:id="refreshBtn" text="Refresh" style="-fx-background-color: #FFC107;"/>-->
+<!--                </HBox>-->
+<!--                &lt;!&ndash; Table &ndash;&gt;-->
+<!--                <TableView fx:id="productTable" prefHeight="400" prefWidth="1100">-->
+<!--                    <columns>-->
+<!--                        <TableColumn fx:id="colSku" text="SKU" prefWidth="120"/>-->
+<!--                        <TableColumn fx:id="colName" text="Name" prefWidth="180"/>-->
+<!--                        <TableColumn fx:id="colCategory" text="Category" prefWidth="150"/>-->
+<!--                        <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>-->
+<!--                        <TableColumn fx:id="colQuantity" text="Quantity" prefWidth="100"/>-->
+<!--                        <TableColumn fx:id="colReorder" text="Reorder Level" prefWidth="130"/>-->
+<!--                        <TableColumn fx:id="colActions" text="Actions" prefWidth="200"/>-->
+<!--                    </columns>-->
+<!--                </TableView>-->
+<!--                &lt;!&ndash; Pagination &ndash;&gt;-->
+<!--                <Pagination fx:id="pagination" pageCount="5" />-->
+<!--            </VBox>-->
+<!--        </ScrollPane>-->
+<!--    </center>-->
+<!--</BorderPane>-->
 
-</AnchorPane>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.store.pantastoreapp.controllers.DashboardController">
+    <!-- Top bar: Welcome label left, spacer, avatar right -->
+    <top>
+        <HBox spacing="12" style="-fx-background-color: linear-gradient(#2C3E50, #34495E); -fx-padding: 12; -fx-alignment: CENTER_LEFT;">
+            <children>
+                  <Label fx:id="welcomeLabel" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: 600;" text="Welcome, User" />
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <StackPane style="-fx-alignment: center-right;">
+                </StackPane>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Center: charts on top, table below -->
+    <center>
+        <VBox spacing="12" style="-fx-padding: 16; -fx-background-color: #f6f8fa;">
+            <children>
+                <!-- Charts area: two charts side by side -->
+                <GridPane hgap="12" vgap="12">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="60" />
+                        <ColumnConstraints percentWidth="40" />
+                    </columnConstraints>
+
+                    <!-- Line Chart (top sold items frequency) -->
+                    <children>
+                        <LineChart fx:id="lineChart" prefHeight="300" title="Top 10 Items - Sales Over Time" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <xAxis>
+                                <CategoryAxis fx:id="lineXAxis" label="Period" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="lineYAxis" label="Units Sold" />
+                            </yAxis>
+                        </LineChart>
+
+                        <!-- Bar Chart (low inventory) -->
+                        <BarChart fx:id="barChart" prefHeight="300" title="Low Inventory" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <xAxis>
+                                <CategoryAxis fx:id="barXAxis" label="Item" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="barYAxis" label="Quantity Left" />
+                            </yAxis>
+                        </BarChart>
+                    </children>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <!-- Controls above the table -->
+                <HBox spacing="8" style="-fx-padding: 8 0 8 0; -fx-alignment: CENTER_LEFT;">
+                    <children>
+                        <Button fx:id="addItemBtn" text="Add Item" />
+                        <Button fx:id="logSaleBtn" text="Log Sale" />
+                        <Separator orientation="VERTICAL" />
+                        <TextField fx:id="searchField" promptText="Search items..." />
+                        <Button fx:id="searchBtn" text="Search" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="refreshBtn" text="Refresh" />
+                    </children>
+                </HBox>
+
+                <!-- Table: spreadsheet like -->
+                <TableView fx:id="productTable" prefHeight="300.0" style="-fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;">
+                    <columns>
+                        <TableColumn fx:id="colSku" prefWidth="120" text="SKU" />
+                        <TableColumn fx:id="colName" prefWidth="220" text="Name" />
+                        <TableColumn fx:id="colCategory" prefWidth="120" text="Category" />
+                        <TableColumn fx:id="colPrice" prefWidth="90" text="Price" />
+                        <TableColumn fx:id="colQuantity" prefWidth="90" text="Quantity" />
+                        <TableColumn fx:id="colReorder" prefWidth="110" text="Reorder Level" />
+                        <TableColumn fx:id="colActions" prefWidth="160" text="Actions" />
+                    </columns>
+                </TableView>
+
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
