@@ -6,6 +6,7 @@ module com.store.pantastoreapp {
     requires jdk.compiler;
     requires com.zaxxer.hikari;
     requires java.sql;
+    requires jbcrypt;
 
 
     opens com.store.pantastoreapp to javafx.fxml;

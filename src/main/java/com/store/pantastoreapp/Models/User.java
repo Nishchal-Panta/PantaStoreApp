@@ -1,26 +1,35 @@
 package com.store.pantastoreapp.Models;
 
-public abstract class User {
-    protected String Fname;
-    protected String Lname;
-    protected String password; // Stored securely (e.g., hashed)
+import java.sql.Timestamp;
 
-    public User() {
-        // Default constructor for frameworks if needed
+public class User {
+    private int id;
+    private String username;
+    private String passwordHash;
+    private String firstName;
+    private String lastName;
+    private Timestamp created_at = new Timestamp(System.currentTimeMillis());
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public Timestamp getCreated_at() {
+        return created_at;
     }
 
-    public User(String Fname, String Lname, String password) {
-        this.Fname = Fname;
-        this.Lname = Lname;
-        this.password = password;
-    }
-    public void setFname(String Fname) {
-        this.Fname = Fname;
-    }
-
-    public void setLname(String name) { this.Lname = Lname;}
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 }
