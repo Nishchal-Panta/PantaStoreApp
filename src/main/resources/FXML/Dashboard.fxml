@@ -170,13 +170,12 @@
                 <!-- Table: spreadsheet like -->
                 <TableView fx:id="productTable" prefHeight="300.0" style="-fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;">
                     <columns>
-                        <TableColumn fx:id="colSku" prefWidth="120" text="SKU" />
                         <TableColumn fx:id="colName" prefWidth="220" text="Name" />
-                        <TableColumn fx:id="colCategory" prefWidth="120" text="Category" />
+                        <TableColumn fx:id="colCat_name" prefWidth="120" text="Category" />
+                        <TableColumn fx:id="colExp" prefWidth="120" text="Expiry_date" />
                         <TableColumn fx:id="colPrice" prefWidth="90" text="Price" />
-                        <TableColumn fx:id="colQuantity" prefWidth="90" text="Quantity" />
-                        <TableColumn fx:id="colReorder" prefWidth="110" text="Reorder Level" />
-                        <TableColumn fx:id="colActions" prefWidth="160" text="Actions" />
+                        <TableColumn fx:id="colQty" prefWidth="90" text="Quantity" />
+                        <TableColumn fx:id="colCreatedAt" prefWidth="160" text="Actions" />
                     </columns>
                 </TableView>
 

@@ -4,6 +4,8 @@ module com.store.pantastoreapp {
     requires java.desktop;
     requires java.logging;
     requires jdk.compiler;
+    requires com.zaxxer.hikari;
+    requires java.sql;
 
 
     opens com.store.pantastoreapp to javafx.fxml;
