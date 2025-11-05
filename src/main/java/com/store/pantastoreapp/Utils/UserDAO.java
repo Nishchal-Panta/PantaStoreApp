@@ -12,17 +12,23 @@ public class UserDAO {
 
     public User createUser(String username, String plainPassword, String firstName, String lastName) throws SQLException {
         String hashed = BCrypt.hashpw(plainPassword, BCrypt.gensalt(12));
-        String sql = "INSERT INTO users (username, password_hash, first_name, last_name, role) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (username, password_hash, first_name, last_name) VALUES (?, ?, ?, ?)";
         try (Connection c = ds.getConnection();
              PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, username);
             ps.setString(2, hashed);
             ps.setString(3, firstName);
-            ps.setString(4, lastName);;
+            ps.setString(4, lastName);
+            ;
+            ParameterMetaData pmd = ps.getParameterMetaData();
+            int expectedCount = 4;
+            if (pmd.getParameterCount() != expectedCount) {
+                throw new IllegalStateException("PreparedStatement parameter count mismatch");
+            }
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 User u = new User();
-                u.setUsername(firstName+"-"+lastName);
+                u.setUsername(firstName + "-" + lastName);
                 u.setPasswordHash(hashed);
                 u.setFirstName(firstName);
                 u.setLastName(lastName);
@@ -33,7 +39,7 @@ public class UserDAO {
     }
 
     public User findByUsername(String username) throws SQLException {
-        String sql = "SELECT id, username, password_hash, first_name, last_name FROM users WHERE username = ?";
+        String sql = "SELECT id, username, password_hash, first_name, last_name, created_at FROM users WHERE username = ?";
         try (Connection c = ds.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, username);
@@ -57,6 +63,22 @@ public class UserDAO {
         User u = findByUsername(username);
         if (u == null) return false;
         return BCrypt.checkpw(plainPassword, u.getPasswordHash());
+    }
+
+    public static void showAllUsers() {
+        String sql = "SELECT * FROM users";
+        try (Connection conn = DBUtil.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                System.out.println("Username: " + rs.getString("username") +
+                        ", Email: " + rs.getString("email") +
+                        ", Phone: " + rs.getString("phone") +
+                        ", Address: " + rs.getString("address"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -73,6 +73,7 @@ public class SignupController {
                 return;
             }
             User created = userDAO.createUser(user, plainPass, fname, lname);
+            UserDAO.showAllUsers();
             // success: navigate back to login or dashboard
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             // optionally set welcome message with created.getFirstName()
@@ -101,15 +102,6 @@ public class SignupController {
             StringBuilder sb = new StringBuilder(bytes.length * 2);
             for (byte b : bytes) sb.append(String.format("%02x", b & 0xff));
             return sb.toString();
-        }
-
-        private String escapeCsv (String value){
-            if (value == null) return "";
-            if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
-                value = value.replace("\"", "\"\"");
-                return "\"" + value + "\"";
-            }
-            return value;
         }
         private boolean isValidPassword (String password){
             // Must contain:
