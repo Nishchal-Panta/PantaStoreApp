@@ -28,7 +28,7 @@ public class LoginController {
     @FXML private PasswordField password;
     @FXML private Button login;
     @FXML private Hyperlink signup;
-
+    private final UserDAO userDAO = new UserDAO();
     @FXML
     private void handleLogin(ActionEvent event) {
         errorMessage.setVisible(false);
@@ -41,13 +41,14 @@ public class LoginController {
             return;
         }
         try{
-            UserDAO userDAO = new UserDAO();
             boolean ok = userDAO.authenticate(enteredUser, enteredPass);
             if (ok) {
+                User u = userDAO.findByUsername(enteredUser);
+                if (u != null) {
+                    CurrentUser.set(u);
+                }
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 SceneManager.switchScene(stage, "/FXML/Dashboard.fxml");
-                User u = userDAO.findByUsername(enteredUser);
-                CurrentUser.set(u);
             } else {
                 errorMessage.setText("Invalid username or password.");
                 errorMessage.setVisible(true);

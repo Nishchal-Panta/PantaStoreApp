@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -102,14 +101,15 @@
 <!--    </center>-->
 <!--</BorderPane>-->
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.store.pantastoreapp.controllers.DashboardController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.store.pantastoreapp.controllers.DashboardController">
     <!-- Top bar: Welcome label left, spacer, avatar right -->
     <top>
         <HBox spacing="12" style="-fx-background-color: linear-gradient(#2C3E50, #34495E); -fx-padding: 12; -fx-alignment: CENTER_LEFT;">
             <children>
-                  <Label fx:id="welcomeLabel" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: 600;" text="Welcome, User" />
+                  <Label fx:id="welcomeMessage" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: 600;" text="Welcome, User" />
 
                 <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#handleLogout" text="Log Out" />
 
                 <StackPane style="-fx-alignment: center-right;">
                 </StackPane>
