@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane accessibleRole="DIALOG" blendMode="OVERLAY" style="-fx-background-radius: 12; -fx-padding: 20; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.store.pantastoreapp.controllers.AddItemPopupController">
+
+    <VBox accessibleRole="DIALOG" alignment="CENTER" blendMode="DARKEN" fillWidth="false" spacing="15" StackPane.alignment="CENTER">
+        <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Add Item" />
+
+        <TextField fx:id="itemNameField" promptText="Item Name" />
+        <TextField fx:id="priceField" promptText="Price" />
+        <TextField fx:id="quantityField" promptText="Quantity" />
+
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="saveButton" style="-fx-background-color:#357DED; -fx-text-fill:white; -fx-padding:8 20;" text="Save" />
+            <Button fx:id="cancelButton" text="Cancel" />
+        </HBox>
+      <effect>
+         <DropShadow />
+      </effect>
+    </VBox>
+   <effect>
+      <InnerShadow />
+   </effect>
+</StackPane>

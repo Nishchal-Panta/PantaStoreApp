@@ -48,7 +48,12 @@ public class LoginController {
                     CurrentUser.set(u);
                 }
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                SceneManager.switchScene(stage, "/FXML/Dashboard.fxml");
+                DashboardController controller =
+                        SceneManager.switchScene(stage, "/FXML/Dashboard.fxml");
+
+                if (controller != null) {
+                    controller.initializeDashboard(CurrentUser.get());
+                }
             } else {
                 errorMessage.setText("Invalid username or password.");
                 errorMessage.setVisible(true);
