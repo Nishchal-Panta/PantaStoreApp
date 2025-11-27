@@ -13,7 +13,7 @@ public class ProductDAO {
         try (Connection conn = DBUtil.getDataSource().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, p.getName());
-            ps.setString(2, p.getExp());
+            ps.setDate(2, java.sql.Date.valueOf(p.getExp().toLocalDate()));
             ps.setDouble(4, p.getPrice());
             ps.setDouble(5, p.getCost());
             ps.setInt(6, p.getQuantity());
@@ -55,7 +55,7 @@ public class ProductDAO {
         try (Connection conn = DBUtil.getDataSource().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, p.getName());
-            ps.setString(2, p.getExp());
+            ps.setDate(2, java.sql.Date.valueOf(p.getExp().toLocalDate()));
             ps.setDouble(4, p.getPrice());
             ps.setDouble(5, p.getCost());
             ps.setInt(6, p.getQuantity());
@@ -78,7 +78,7 @@ public class ProductDAO {
     private Product mapRow(ResultSet rs) throws SQLException {
         Product p = new Product();
         p.setId(rs.getInt("id"));
-        p.setExp(rs.getString("exp_date").replace("-", "/").replace(" ", "T00:00:00.000+00:00"));
+        p.setExp(rs.getDate("exp_date"));
         p.setName(rs.getString("name"));
         p.setPrice(rs.getDouble("price"));
         p.setCost(rs.getDouble("cost"));
@@ -86,5 +86,20 @@ public class ProductDAO {
         p.setCat_name(rs.getString("cat_name"));
         p.setTimestamp(rs.getTimestamp("Activity"));
         return p;
+    }
+    public void insert(Product product) throws SQLException {
+        String sql = "INSERT INTO products (name, price, cost, quantity, exp_date, cat_name) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DBUtil.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, product.getName());
+            stmt.setDouble(2, product.getPrice());
+            stmt.setDouble(3, product.getCost());
+            stmt.setInt(4, product.getQuantity());
+            stmt.setDate(5, java.sql.Date.valueOf(product.getExp().toLocalDate()));
+            stmt.setString(6, product.getCat_name());
+            stmt.executeUpdate();
+        }
     }
 }

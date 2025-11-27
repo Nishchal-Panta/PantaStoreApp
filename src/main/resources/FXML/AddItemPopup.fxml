@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -15,12 +16,15 @@
         <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Add Item" />
 
         <TextField fx:id="itemNameField" promptText="Item Name" />
-        <TextField fx:id="priceField" promptText="Price" />
-        <TextField fx:id="quantityField" promptText="Quantity" />
+        <TextField fx:id="itemPriceField" promptText="Price" />
+      <TextField fx:id="itemCostField" promptText="Cost" />
+        <TextField fx:id="itemQtyField" promptText="Quantity" />
+      <DatePicker fx:id="itemExpField" promptText="Expiry Date" />
+      <TextField fx:id="itemCatField" promptText="Category" />
 
         <HBox alignment="CENTER" spacing="10">
-            <Button fx:id="saveButton" style="-fx-background-color:#357DED; -fx-text-fill:white; -fx-padding:8 20;" text="Save" />
-            <Button fx:id="cancelButton" text="Cancel" />
+            <Button fx:id="saveBtn" style="-fx-background-color:#357DED; -fx-text-fill:white; -fx-padding:8 20;" text="Save" />
+            <Button fx:id="cancelBtn" text="Cancel" />
         </HBox>
       <effect>
          <DropShadow />

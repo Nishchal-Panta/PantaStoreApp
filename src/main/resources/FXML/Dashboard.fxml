@@ -94,12 +94,15 @@
                     <!--PRODUCT TABLE-->
                     <TableView fx:id="productTable" prefHeight="300" style="-fx-border-color: #e0e0e0;                                       -fx-border-radius: 6;                                       -fx-background-radius: 6;">
                         <columns>
+                            <TableColumn fx:id="colProduct_ID" prefWidth="100" text="Product_ID" />
                             <TableColumn fx:id="colName" prefWidth="220" text="Name" />
                             <TableColumn fx:id="colCat_name" prefWidth="120" text="Category" />
                             <TableColumn fx:id="colExp" prefWidth="120" text="Expiry_date" />
                             <TableColumn fx:id="colPrice" prefWidth="90" text="Price" />
+                            <TableColumn fx:id="colCost" prefWidth="90" text="Cost"/>
                             <TableColumn fx:id="colQty" prefWidth="90" text="Quantity" />
-                            <TableColumn fx:id="colCreatedAt" prefWidth="160" text="Actions" />
+                            <TableColumn fx:id="colCreatedAt" prefWidth="160" text="Creation_Date" />
+                            <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
                         </columns>
                     </TableView>
 
