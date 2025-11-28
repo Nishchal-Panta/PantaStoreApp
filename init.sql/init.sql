@@ -1,5 +1,4 @@
 CREATE DATABASE IF NOT EXISTS pantastore CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE pantastore;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,21 +16,29 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 
 CREATE TABLE IF NOT EXISTS products (
-  name VARCHAR(255) NOT NULL PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
   exp_date DATE NULL DEFAULT NULL,
   price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   cost DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   quantity INT NOT NULL DEFAULT 0,
-  cat_name VARCHAR(100) NOT NULL UNIQUE,
+  cat_name VARCHAR(100) NULL,
+  cat_id INT NULL DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (cat_name) REFERENCES categories(name) ON DELETE SET NULL
+  CONSTRAINT fk_category
+      FOREIGN KEY (cat_name)
+          REFERENCES categories(name)
+          ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS stock_movements (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
   product_name varchar(255) NOT NULL,
   qty_change INT NOT NULL,
   type ENUM('sale','restock','adjustment') NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (product_name) REFERENCES products(name) ON DELETE CASCADE
+  FOREIGN KEY (product_id)
+      REFERENCES products(id)
+      ON DELETE CASCADE
 );

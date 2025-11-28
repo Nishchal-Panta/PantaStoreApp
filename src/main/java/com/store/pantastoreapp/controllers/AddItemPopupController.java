@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
+
 public class AddItemPopupController {
 
     @FXML private TextField itemNameField;
@@ -26,7 +28,13 @@ public class AddItemPopupController {
 
     @FXML
     public void initialize() {
-        saveBtn.setOnAction(e -> handleSave());
+        saveBtn.setOnAction(e -> {
+            try {
+                handleSave();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         cancelBtn.setOnAction(e -> closePopup());
     }
 
@@ -39,7 +47,7 @@ public class AddItemPopupController {
     }
 
     @FXML
-    private void handleSave() {
+    private void handleSave() throws SQLException {
         try {
             if (editingProduct == null) {
                 // INSERT
@@ -66,6 +74,7 @@ public class AddItemPopupController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         }
     }
     public void setEditingProduct(Product p) {

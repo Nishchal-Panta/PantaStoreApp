@@ -71,10 +71,7 @@ public class UserDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                System.out.println("Username: " + rs.getString("username") +
-                        ", Email: " + rs.getString("email") +
-                        ", Phone: " + rs.getString("phone") +
-                        ", Address: " + rs.getString("address"));
+                System.out.println("Username: " + rs.getString("username"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
