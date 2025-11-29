@@ -9,36 +9,36 @@ import java.util.List;
 
 public class ProductDAO {
 
-    public Product create(Product p) throws SQLException {
-        String sql = "INSERT INTO products (name, exp_date, price, cost, quantity, cat_name, created_at) VALUES (?,?,?,?,?,?,?)";
-        try (Connection conn = DBUtil.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//    public Product create(Product p) throws SQLException {
+//        String sql = "INSERT INTO products (name, exp_date, price, cost, quantity, cat_name, created_at) VALUES (?,?,?,?,?,?,?)";
+//        try (Connection conn = DBUtil.getDataSource().getConnection();
+//             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//
+//            ps.setString(1, p.getName());
+//            if (p.getExp() != null) {
+//                ps.setDate(2, java.sql.Date.valueOf(p.getExp().toLocalDate()));
+//            } else {
+//                ps.setNull(2, Types.DATE);
+//            }
+//            ps.setDouble(3, p.getPrice());
+//            ps.setDouble(4, p.getCost());
+//            ps.setInt(5, p.getQuantity());
+//            ps.setString(6, p.getCat_name());
+//            ps.setTimestamp(7, p.getTimestamp());
+//            ps.executeUpdate();
+//
+//            try (ResultSet rs = ps.getGeneratedKeys()) {
+//                if (rs.next()) p.setId(rs.getInt(1));
+//            }
+//            return p;
+//        }
+//    }
 
-            ps.setString(1, p.getName());
-            if (p.getExp() != null) {
-                ps.setDate(2, java.sql.Date.valueOf(p.getExp().toLocalDate()));
-            } else {
-                ps.setNull(2, Types.DATE);
-            }
-            ps.setDouble(3, p.getPrice());
-            ps.setDouble(4, p.getCost());
-            ps.setInt(5, p.getQuantity());
-            ps.setString(6, p.getCat_name());
-            ps.setTimestamp(7, p.getTimestamp());
-            ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) p.setId(rs.getInt(1));
-            }
-            return p;
-        }
-    }
-
-    public Product findById(int id) throws SQLException {
-        String sql = "SELECT * FROM products WHERE id = ?";
+    public Product findByName(String name) throws SQLException {
+        String sql = "SELECT * FROM products WHERE name = ?";
         try (Connection conn = DBUtil.getDataSource().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setString(1, name);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) return mapRow(rs);
             }

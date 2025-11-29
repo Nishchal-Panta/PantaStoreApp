@@ -25,13 +25,8 @@ public class DbMigrations {
             price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
             cost DECIMAL(10,2) NOT NULL DEFAULT 0.00,
             quantity INT NOT NULL DEFAULT 0,
-            cat_name VARCHAR(100) NULL,
-            cat_id INT NULL DEFAULT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            CONSTRAINT fk_category
-                FOREIGN KEY (cat_name)
-                    REFERENCES categories(name)
-                    ON DELETE SET NULL
+            cat_name VARCHAR(255) NULL DEFAULT 'Uncategorized',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
         """;
 

@@ -1,49 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<StackPane  style="-fx-background-color: #f6f8fa;" fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.store.pantastoreapp.controllers.DashboardController">
+<StackPane fx:id="rootPane"
+           xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.store.pantastoreapp.controllers.DashboardController"
+           style="-fx-background-color: #f6f8fa;">
 
-    <!-- Main dashboard layout -->
+    <!-- MAIN DASHBOARD (keeps existing layout) -->
     <BorderPane fx:id="dashboardRoot">
-<!--        TOP BAR -->
+
+        <!-- TOP -->
         <top>
-            <HBox spacing="12" style="-fx-background-color: linear-gradient(#2C3E50, #34495E);                          -fx-padding: 12;                          -fx-alignment: CENTER_LEFT;">
+            <HBox spacing="12" style="-fx-background-color: linear-gradient(#2C3E50, #34495E); -fx-padding: 12; -fx-alignment: CENTER_LEFT;">
                 <children>
-
-                    <Label fx:id="welcomeMessage" style="-fx-text-fill: white;                                   -fx-font-size: 18px;                                   -fx-font-weight: 600;" text="Welcome, User" />
-
+                    <Label fx:id="welcomeMessage" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: 600;" text="Welcome, User" />
                     <Region HBox.hgrow="ALWAYS" />
-
-                    <Button fx:id="logout" onAction="#handleLogout" text="Log Out" />
-
+                    <Button fx:id="logout" mnemonicParsing="false" onAction="#handleLogout" text="Log Out" />
                 </children>
             </HBox>
         </top>
 
-        <!--CENTER AREA-->
+        <!-- CENTER -->
         <center>
             <VBox spacing="12" style="-fx-padding: 16;">
                 <children>
 
-                    <!--CHARTS GRID-->
+                    <!-- Charts area -->
                     <GridPane hgap="12" vgap="12">
                         <columnConstraints>
                             <ColumnConstraints percentWidth="60" />
@@ -51,8 +41,6 @@
                         </columnConstraints>
 
                         <children>
-
-                            <!-- Line Chart -->
                             <LineChart fx:id="lineChart" prefHeight="300" title="Top 10 Items - Sales Over Time" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                 <xAxis>
                                     <CategoryAxis fx:id="lineXAxis" label="Period" />
@@ -62,7 +50,6 @@
                                 </yAxis>
                             </LineChart>
 
-                            <!-- Bar Chart -->
                             <BarChart fx:id="barChart" prefHeight="300" title="Low Inventory" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                 <xAxis>
                                     <CategoryAxis fx:id="barXAxis" label="Item" />
@@ -71,38 +58,34 @@
                                     <NumberAxis fx:id="barYAxis" label="Quantity Left" />
                                 </yAxis>
                             </BarChart>
-
                         </children>
-                  <rowConstraints>
-                     <RowConstraints />
-                  </rowConstraints>
                     </GridPane>
 
-                    <!--CONTROL BAR-->
+                    <!-- Control bar -->
                     <HBox spacing="8" style="-fx-padding: 8 0 8 0; -fx-alignment: CENTER_LEFT;">
                         <children>
-                            <Button fx:id="addItemBtn" onAction="#handleStockAdd" text="Add Item" />
+                            <Button fx:id="addItemBtn" text="Add Item" onAction="#handleStockAdd" />
                             <Button fx:id="logSaleBtn" text="Log Sale" />
                             <Separator orientation="VERTICAL" />
                             <TextField fx:id="searchField" promptText="Search items..." />
                             <Button fx:id="searchBtn" text="Search" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Button fx:id="refreshBtn" text="Refresh" />
+                            <Button fx:id="refreshBtn" text="Refresh" onAction="#onRefresh" />
                         </children>
                     </HBox>
 
-                    <!--PRODUCT TABLE-->
-                    <TableView fx:id="productTable" prefHeight="300" style="-fx-border-color: #e0e0e0;                                       -fx-border-radius: 6;                                       -fx-background-radius: 6;">
+                    <!-- Table -->
+                    <TableView fx:id="productTable" prefHeight="300.0" style="-fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;">
                         <columns>
-                            <TableColumn fx:id="colProduct_ID" prefWidth="100" text="Product_ID" />
+                            <TableColumn fx:id="colProduct_ID" prefWidth="60" text="ID" />
                             <TableColumn fx:id="colName" prefWidth="220" text="Name" />
                             <TableColumn fx:id="colCat_name" prefWidth="120" text="Category" />
                             <TableColumn fx:id="colExp" prefWidth="120" text="Expiry_date" />
                             <TableColumn fx:id="colPrice" prefWidth="90" text="Price" />
-                            <TableColumn fx:id="colCost" prefWidth="90" text="Cost"/>
+                            <TableColumn fx:id="colCost" prefWidth="90" text="Cost" />
                             <TableColumn fx:id="colQty" prefWidth="90" text="Quantity" />
-                            <TableColumn fx:id="colCreatedAt" prefWidth="160" text="Creation_Date" />
-                            <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
+                            <TableColumn fx:id="colCreatedAt" prefWidth="160" text="Created At" />
+                            <TableColumn fx:id="colActions" prefWidth="160" text="Actions" />
                         </columns>
                     </TableView>
 
@@ -112,4 +95,50 @@
 
     </BorderPane>
 
+    <!-- ================== Embedded Add/Edit Item Modal (hidden by default) ================== -->
+    <AnchorPane fx:id="addItemPane" visible="false" managed="false">
+        <!-- dimming rectangle handled in controller; pane acts as centered card -->
+        <children>
+            <VBox fx:id="addCard" alignment="CENTER" spacing="12"
+                  layoutX="0" layoutY="0"
+                  style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 20, 0, 0, 6);">
+                <children>
+                    <Label text="Add / Edit Item" style="-fx-font-size: 18px; -fx-font-weight: 600;" />
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="30"/>
+                            <ColumnConstraints percentWidth="70"/>
+                        </columnConstraints>
+
+                        <children>
+                            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <TextField fx:id="itemNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                            <Label text="Price:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <TextField fx:id="itemPriceField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                            <Label text="Cost:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                            <TextField fx:id="itemCostField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                            <Label text="Quantity:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                            <TextField fx:id="itemQtyField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                            <Label text="Category:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                            <TextField fx:id="itemCatField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                            <Label text="Expiry:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                            <DatePicker fx:id="itemExpField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                        </children>
+                    </GridPane>
+
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <children>
+                            <Button fx:id="cancelBtn" text="Cancel" onAction="#onCancelAddItem"/>
+                            <Button fx:id="saveBtn" text="Save" onAction="#onSaveAddItem"/>
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </AnchorPane>
 </StackPane>
